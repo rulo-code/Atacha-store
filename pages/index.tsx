@@ -1,5 +1,8 @@
 import React from "react"
+import Page from "../components/Page"
+
 const Index: React.FunctionComponent = () => {
-  return <h1>Hello Next.js 👋</h1>
+  return <>Hello Next.js </>
 }
+
 export default Index
