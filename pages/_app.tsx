@@ -8,7 +8,7 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Aprendiendo Next</title>
+        <title>Atacha</title>
       </Head>
       <Page name="Cesar">
         <Component {...pageProps} />

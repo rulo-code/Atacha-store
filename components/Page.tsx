@@ -1,14 +1,12 @@
 import React from "react"
 import Header from "./Header"
 interface IProps {
-  name: string
   children: React.ReactNode
 }
-const Page: React.FC<IProps> = ({ name, children }) => {
+const Page: React.FC<IProps> = ({ children }) => {
   return (
     <>
       <Header />
-      <h2>{name}</h2>
       {children}
     </>
   )

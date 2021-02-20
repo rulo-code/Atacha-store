@@ -1,5 +1,5 @@
 const Index: React.FunctionComponent = () => {
-  return <>Hello Next.js </>
+  return <>Atacha</>
 }
 
 export default Index
