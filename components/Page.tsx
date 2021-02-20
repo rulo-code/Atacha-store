@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
     --primaryColor: #fafafa;
     width: 100vw;
     overflow-y: hidden;
+    border: red solid 1px;
   }
   * {
     margin: 0;

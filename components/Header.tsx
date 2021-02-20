@@ -8,7 +8,7 @@ const HeaderStyles = styled.header`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: 100%;
 
   .logo-container {
     display: flex;
