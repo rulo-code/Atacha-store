@@ -1,7 +1,8 @@
 import * as React from "react"
 import { AppProps } from "next/app"
-import Page from "../components/Page"
+import Page from "../components/Page/Page"
 import Head from "next/head"
+import "../assets/styles/global.scss"
 
 export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
