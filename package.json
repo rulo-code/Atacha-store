@@ -16,10 +16,12 @@
     "@types/next": "^9.0.0",
     "@types/react": "^17.0.0",
     "@zeit/next-typescript": "^1.1.1",
+    "firebase": "^8.2.9",
     "next-images": "^1.7.0",
     "nprogress": "^0.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-hook-form": "^6.15.4",
     "sass": "^1.32.8",
     "styled-components": "^5.2.1"
   },
