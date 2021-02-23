@@ -11,7 +11,7 @@ const Header: React.FC = () => {
         <Link href="/">
           {/* // mejorar seo */}
           <a className={styles.logo}>
-            <Image src="/images/logo.svg" alt="logo" layout="responsive" width={0} height={0} />
+            <Image src="/images/logo2.png" alt="logo" layout="responsive" width={150} height={62} />
           </a>
         </Link>
       </div>
