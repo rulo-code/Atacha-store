@@ -6,26 +6,47 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  right: 1-00%;
+  width: 70%;
+  margin: 0 auto;
   background-color: var(--light-color-2);
   border-radius: 2rem 2rem 0 0;
-  padding-bottom: 1rem;
 }
 
 .navbarItem {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 1rem;
   height: 5rem;
+  transition: 0.3s;
+  border-bottom: solid transparent 0.2rem;
 
+  .image {
+    width: 2rem;
+  }
+  .label {
+    padding-top: 0.2rem;
+    font-weight: bold;
+    color: var(--main-bg-color);
+  }
+}
+
+.navbarItemActive {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  height: 5rem;
+  border-bottom: solid var(--main-color-1) 0.2rem;
   .image {
     width: 2.5rem;
   }
   .label {
     padding-top: 0.2rem;
     font-weight: bold;
-    color: var(--main-bg-color);
+    color: var(--main-color-1);
   }
 }

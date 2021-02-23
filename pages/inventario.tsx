@@ -1,6 +1,6 @@
 const inventario: React.FunctionComponent = () => {
   return (
-    <div>
+    <div className="renderedPage">
       <p>inventario</p>
     </div>
   )

@@ -28,3 +28,13 @@ a {
   color: var(--dark-color-3);
   text-decoration: none;
 }
+
+.renderedPage {
+  min-height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
