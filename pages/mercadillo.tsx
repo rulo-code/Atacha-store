@@ -1,6 +1,6 @@
 const mercadillo: React.FunctionComponent = () => {
   return (
-    <div>
+    <div className="renderedPage">
       <p>mercadillo</p>
     </div>
   )

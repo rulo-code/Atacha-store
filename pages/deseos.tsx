@@ -1,6 +1,6 @@
 const deseos: React.FunctionComponent = () => {
   return (
-    <div>
+    <div className="renderedPage">
       <p>deseos</p>
     </div>
   )
