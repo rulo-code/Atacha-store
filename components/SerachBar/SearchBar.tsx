@@ -4,7 +4,7 @@ import styles from "./SearchBar.module.scss"
 const SearchBar: React.FC = () => {
   return (
     <div className={styles.searchBar}>
-      <input placeholder="Busca lo que deseas ..." type="text" />
+      <input placeholder="Haz tu deseo realidad ..." type="text" />
       <button>
         <i className="fas fa-search"></i>
       </button>
