@@ -1,5 +1,6 @@
 import * as React from "react"
 import { AppProps } from "next/app"
+import { AuthProvider } from "../hooks/useAuth"
 import Page from "../components/Page/Page"
 
 import Router from "next/router"
@@ -21,7 +22,9 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <title>Atacha</title>
       </Head>
       <Page>
-        <Component {...pageProps} />
+        <AuthProvider>
+          <Component {...pageProps} />
+        </AuthProvider>
       </Page>
     </>
   )
