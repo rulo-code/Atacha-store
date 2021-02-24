@@ -1,6 +1,8 @@
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useAuth } from "../../hooks/useAuth"
 import { useRouter } from "next/router"
+import Link from "next/link"
 
 interface LoginData {
   email: string
@@ -8,13 +10,15 @@ interface LoginData {
 }
 
 const LoginForm: React.FC = () => {
+  const [error, setError] = useState(null)
   const { register, errors, handleSubmit } = useForm()
   const auth = useAuth()
   const router = useRouter()
 
   const onSubmit = (data: LoginData) => {
-    return auth.signIn(data).then(() => {
-      router.push("/account")
+    setError(null)
+    return auth.signIn(data).then((response) => {
+      response.error ? setError(response.error) : router.push("/account")
     })
   }
 
@@ -23,17 +27,17 @@ const LoginForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label htmlFor="email">Email address</label>
+        <label htmlFor="email">Email</label>
         <div>
           <input
             id="email"
             type="email"
             name="email"
             ref={register({
-              required: "Please enter an email",
+              required: "Por favor ingresa tu email",
               pattern: {
                 value: reCorto,
-                message: "Not a valid email",
+                message: "Email no valido",
               },
             })}
           />
@@ -41,17 +45,17 @@ const LoginForm: React.FC = () => {
         </div>
       </div>
       <div className="mt-6">
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Contraseña</label>
         <div>
           <input
             id="password"
             type="password"
             name="password"
             ref={register({
-              required: "Please enter a password",
+              required: "Por favor ingresa una contraseña",
               minLength: {
                 value: 6,
-                message: "Should have at least 6 characters",
+                message: "Debe tener al menos 6 caracteres",
               },
             })}
           />
@@ -60,9 +64,19 @@ const LoginForm: React.FC = () => {
       </div>
       <div className="mt-6">
         <span>
-          <button type="submit">Login</button>
+          <button type="submit">Ingresar</button>
         </span>
       </div>
+      <div>
+        <Link href="/resetPassword">
+          <a href="#">¿Olvidaste tu contraseña?</a>
+        </Link>
+      </div>
+      {error?.message && (
+        <div>
+          <span>{error.message}</span>
+        </div>
+      )}
     </form>
   )
 }

@@ -4,11 +4,11 @@ import SingUpForm from "../components/Forms/singUpForm"
 const SignUpPage: React.FC = () => {
   return (
     <div>
-      <h2>Sign up</h2>
+      <h2>Registro</h2>
       <p>
-        already have an account?{" "}
+        ¿Ya tiene una cuenta?{" "}
         <Link href="/login">
-          <a href="#">Log in</a>
+          <a href="#">¡Ingresa!</a>
         </Link>
       </p>
       <SingUpForm />

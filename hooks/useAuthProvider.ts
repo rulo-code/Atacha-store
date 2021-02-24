@@ -23,8 +23,8 @@ const useAuthProvider = () => {
   const signUp = async ({ name, email, password }: UserData) => {
     try {
       const response = await auth.createUserWithEmailAndPassword(email, password)
-      auth.currentUser.sendEmailVerification()
-      return await createUser({ uid: response.user.uid, email, name })
+      auth.currentUser?.sendEmailVerification()
+      return await createUser({ uid: response.user?.uid, email, name })
     } catch (error) {
       return { error }
     }
@@ -37,7 +37,7 @@ const useAuthProvider = () => {
     }
   }
 
-  const signIn = async ({ email, password }: UserData) => {
+  const signIn = async ({ email, password }) => {
     try {
       const response = await auth.signInWithEmailAndPassword(email, password)
       setUser(response.user)
@@ -48,21 +48,37 @@ const useAuthProvider = () => {
     }
   }
 
+  const handleAuthStateChanged = (usuario: firebase.User) => {
+    setUser(usuario)
+    if (usuario) {
+      getUserAdditionalData(usuario)
+    }
+  }
+
+  const sendPasswordResetEmail = async (email: UserData) => {
+    const response = await auth.sendPasswordResetEmail(email)
+    return response
+  }
+
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(handleAuthStateChanged)
 
     return () => unsub()
   }, [])
 
-  const handleAuthStateChanged = (user: firebase.User) => {
-    setUser(user)
-    if (user) {
-      getUserAdditionalData(user)
+  useEffect(() => {
+    if (user?.uid) {
+      // Subscribe to user document on mount
+      const unsubscribe = db
+        .collection("users")
+        .doc(user.uid)
+        .onSnapshot((doc) => setUser(doc.data()))
+      return () => unsubscribe()
     }
-  }
+  }, [])
+
   const signOut = async () => {
     await auth.signOut()
-
     return setUser(false)
   }
   return {
@@ -70,6 +86,7 @@ const useAuthProvider = () => {
     signUp,
     signIn,
     signOut,
+    sendPasswordResetEmail,
   }
 }
 export default useAuthProvider

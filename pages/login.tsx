@@ -4,11 +4,11 @@ import LoginForm from "../components/Forms/loginForm"
 const LoginPage: React.FC = () => {
   return (
     <div>
-      <h2>Log in</h2>
+      <h2>Ingresar</h2>
       <p>
-        {"Don't have an account? "}
+        {"¿No tienes cuenta?"}
         <Link href="/registro">
-          <a href="#">Sign Up</a>
+          <a href="#">¡Registrate!</a>
         </Link>
       </p>
       <div>
