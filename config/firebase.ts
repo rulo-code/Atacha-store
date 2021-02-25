@@ -21,5 +21,6 @@ const db = firebase.firestore()
 // const now = firebase.firestore.Timestamp.now()
 // const storage = firebase.storage()
 const fbAuth = new firebase.auth.FacebookAuthProvider()
-export { auth, db, fbAuth }
+const googleAuth = new firebase.auth.GoogleAuthProvider()
+export { auth, db, fbAuth, googleAuth }
 console.log(app.name ? "Firebase Mode Activated!" : "Firebase not working :(")

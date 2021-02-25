@@ -27,6 +27,14 @@ const LoginForm: React.FC = () => {
       response.error ? setError(response.error) : router.push("/account")
     })
   }
+
+  const loginGoogle = () => {
+    setError(null)
+    return auth.ggLogin().then((response) => {
+      response.error ? setError(response.error) : router.push("/account")
+    })
+  }
+
   const reCorto: RegExp = /\S+@\S+\.\S+/
 
   return (
@@ -86,6 +94,9 @@ const LoginForm: React.FC = () => {
       </form>
       <div>
         <button onClick={loginFB}>inicia Sesion con facebook</button>
+      </div>
+      <div>
+        <button onClick={loginGoogle}>inicia Sesion con Google</button>
       </div>
     </>
   )

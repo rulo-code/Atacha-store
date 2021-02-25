@@ -1,7 +1,5 @@
-import { debug } from "console"
 import { useState, useEffect } from "react"
-import LoginForm from "../components/Forms/loginForm"
-import { auth, db, fbAuth } from "../config/firebase"
+import { auth, db, fbAuth, googleAuth } from "../config/firebase"
 interface UserData {
   name: string
   email: string
@@ -86,6 +84,28 @@ const useAuthProvider = () => {
       return { error }
     }
   }
+  const ggLogin = async () => {
+    try {
+      const response = await auth.signInWithPopup(googleAuth)
+      setUser({ name: response.user?.displayName, email: response.user?.email })
+      if (response.additionalUserInfo.isNewUser === true) {
+        return (
+          await createUser({
+            uid: response.user?.uid,
+            email: response.user?.email,
+            name: response.user?.displayName,
+          }),
+          user
+        )
+      } else {
+        getUserAdditionalData(user)
+        return user
+      }
+    } catch (error) {
+      return { error }
+    }
+  }
+
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(handleAuthStateChanged)
 
@@ -110,6 +130,7 @@ const useAuthProvider = () => {
     signOut,
     sendPasswordResetEmail,
     fbLogin,
+    ggLogin,
   }
 }
 export default useAuthProvider
