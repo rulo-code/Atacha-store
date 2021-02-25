@@ -1,12 +1,12 @@
+import { debug } from "console"
 import { useState, useEffect } from "react"
-import { auth, db } from "../config/firebase"
-
+import LoginForm from "../components/Forms/loginForm"
+import { auth, db, fbAuth } from "../config/firebase"
 interface UserData {
   name: string
   email: string
   password: string
 }
-
 const useAuthProvider = () => {
   const [user, setUser] = useState(null)
 
@@ -23,7 +23,7 @@ const useAuthProvider = () => {
   const signUp = async ({ name, email, password }: UserData) => {
     try {
       const response = await auth.createUserWithEmailAndPassword(email, password)
-      auth.currentUser?.sendEmailVerification()
+      auth.currentUser.sendEmailVerification()
       return await createUser({ uid: response.user?.uid, email, name })
     } catch (error) {
       return { error }
@@ -60,6 +60,32 @@ const useAuthProvider = () => {
     return response
   }
 
+  const signOut = async () => {
+    await auth.signOut()
+    return setUser(false)
+  }
+
+  const fbLogin = async () => {
+    try {
+      const response = await auth.signInWithPopup(fbAuth)
+      setUser({ name: response.user?.displayName, email: response.user?.email })
+      if (response.additionalUserInfo.isNewUser === true) {
+        return (
+          await createUser({
+            uid: response.user?.uid,
+            email: response.user?.email,
+            name: response.user?.displayName,
+          }),
+          user
+        )
+      } else {
+        getUserAdditionalData(user)
+        return user
+      }
+    } catch (error) {
+      return { error }
+    }
+  }
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(handleAuthStateChanged)
 
@@ -77,16 +103,13 @@ const useAuthProvider = () => {
     }
   }, [])
 
-  const signOut = async () => {
-    await auth.signOut()
-    return setUser(false)
-  }
   return {
     user,
     signUp,
     signIn,
     signOut,
     sendPasswordResetEmail,
+    fbLogin,
   }
 }
 export default useAuthProvider
