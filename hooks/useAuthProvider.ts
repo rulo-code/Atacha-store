@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react"
 import { auth, db, fbAuth, googleAuth } from "../config/firebase"
 interface UserData {
-  name: string
-  email: string
-  password: string
+  name: string | any
+  email: string | any
+  password?: string | any
+  uid?: string
 }
 const useAuthProvider = () => {
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<UserData>({
     email: "",
 name: "",
 uid: "",
@@ -32,7 +33,7 @@ uid: "",
     }
   }
 
-  const getUserAdditionalData = async (user: firebase.User ) => {
+  const getUserAdditionalData = async (user: any) => {
     const userData = await db.collection("users").doc(user.uid).get()
     console.log(userData.data())
     if (userData) {
@@ -46,7 +47,7 @@ uid: "",
     }
   }
 
-  const signIn = async ({ email, password }) => {
+  const signIn = async ({ email, password }: any) => {
     try {
       const response: any = await auth.signInWithEmailAndPassword(email, password)
       let logedUser
@@ -66,28 +67,32 @@ uid: "",
     }
   }
 
-  const handleAuthStateChanged = (usuario: firebase.User) => {
+  const handleAuthStateChanged = (usuario: any) => {
     setUser(usuario)
     if (usuario) {
       getUserAdditionalData(usuario)
     }
   }
 
-  const sendPasswordResetEmail = async (email: UserData) => {
+  const sendPasswordResetEmail = async (email: any) => {
     const response = await auth.sendPasswordResetEmail(email)
     return response
   }
 
   const signOut = async () => {
     await auth.signOut()
-    return setUser(false)
+    return setUser({
+      email: "",
+  name: "",
+  uid: "",
+    })
   }
 
   const fbLogin = async () => {
     try {
       const response = await auth.signInWithPopup(fbAuth)
       setUser({ name: response.user?.displayName, email: response.user?.email })
-      if (response.additionalUserInfo.isNewUser === true) {
+      if (response?.additionalUserInfo?.isNewUser === true) {
         return (
           await createUser({
             uid: response.user?.uid,
@@ -107,8 +112,8 @@ uid: "",
   const ggLogin = async () => {
     try {
       const response = await auth.signInWithPopup(googleAuth)
-      setUser({ name: response.user?.displayName, email: response.user?.email })
-      if (response.additionalUserInfo.isNewUser === true) {
+      setUser({ name: String(response.user?.displayName), email: response.user?.email })
+      if (response?.additionalUserInfo?.isNewUser === true) {
         return (
           await createUser({
             uid: response.user?.uid,
@@ -138,7 +143,16 @@ uid: "",
       const unsubscribe = db
         .collection("users")
         .doc(user.uid)
-        .onSnapshot((doc) => setUser(doc.data()))
+        .onSnapshot((doc) => {
+          let newUser
+          console.log(doc.data())
+          newUser = doc.data()
+          setUser({
+            email: newUser?.email,
+            name: newUser?.name,
+            uid: newUser?.uid
+          })
+        })
       return () => unsubscribe()
     }
   }, [])
