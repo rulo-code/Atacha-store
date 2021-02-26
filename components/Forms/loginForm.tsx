@@ -10,27 +10,30 @@ interface LoginData {
 }
 
 const LoginForm: React.FC = () => {
-  const [error, setError] = useState(null)
+  const [error, setError] = useState({
+    code: "",
+    message: "",
+  })
   const { register, errors, handleSubmit } = useForm()
   const auth = useAuth()
   const router = useRouter()
 
   const onSubmit = (data: LoginData) => {
     setError(null)
-    return auth.signIn(data).then((response) => {
+    return auth.signIn(data).then((response: any) => {
       response?.error ? setError(response.error) : router.push("/account")
     })
   }
   const loginFB = () => {
     setError(null)
-    return auth.fbLogin().then((response) => {
+    return auth.fbLogin().then((response: any) => {
       response?.error ? setError(response.error) : router.push("/account")
     })
   }
 
   const loginGoogle = () => {
     setError(null)
-    return auth.ggLogin().then((response) => {
+    return auth.ggLogin().then((response: any) => {
       response?.error ? setError(response.error) : router.push("/account")
     })
   }
