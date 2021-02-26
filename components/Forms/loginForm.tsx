@@ -18,20 +18,20 @@ const LoginForm: React.FC = () => {
   const onSubmit = (data: LoginData) => {
     setError(null)
     return auth.signIn(data).then((response) => {
-      response.error ? setError(response.error) : router.push("/account")
+      response?.error ? setError(response.error) : router.push("/account")
     })
   }
   const loginFB = () => {
     setError(null)
     return auth.fbLogin().then((response) => {
-      response.error ? setError(response.error) : router.push("/account")
+      response?.error ? setError(response.error) : router.push("/account")
     })
   }
 
   const loginGoogle = () => {
     setError(null)
     return auth.ggLogin().then((response) => {
-      response.error ? setError(response.error) : router.push("/account")
+      response?.error ? setError(response.error) : router.push("/account")
     })
   }
 
