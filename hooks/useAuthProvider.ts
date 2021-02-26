@@ -6,7 +6,7 @@ interface UserData {
   password: string
 }
 const useAuthProvider = () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState({})
 
   const createUser = async (user: any) => {
     try {
