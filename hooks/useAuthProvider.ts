@@ -6,7 +6,11 @@ interface UserData {
   password: string
 }
 const useAuthProvider = () => {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({
+    email: "",
+name: "",
+uid: "",
+  })
 
   const createUser = async (user: any) => {
     try {
@@ -21,23 +25,39 @@ const useAuthProvider = () => {
   const signUp = async ({ name, email, password }: UserData) => {
     try {
       const response = await auth.createUserWithEmailAndPassword(email, password)
-      auth.currentUser.sendEmailVerification()
+      // auth.currentUser.sendEmailVerification()
       return await createUser({ uid: response.user?.uid, email, name })
     } catch (error) {
       return { error }
     }
   }
 
-  const getUserAdditionalData = async (user: firebase.User) => {
+  const getUserAdditionalData = async (user: firebase.User ) => {
     const userData = await db.collection("users").doc(user.uid).get()
-    if (userData.data()) {
-      setUser(userData.data())
+    console.log(userData.data())
+    if (userData) {
+      let registeredUser
+      registeredUser = userData.data()
+      setUser({
+        email: registeredUser?.email,
+        name: registeredUser?.name,
+        uid: registeredUser?.uid
+      })
     }
   }
 
   const signIn = async ({ email, password }) => {
     try {
-      const response = await auth.signInWithEmailAndPassword(email, password)
+      const response: any = await auth.signInWithEmailAndPassword(email, password)
+      let logedUser
+      if (response) {
+        logedUser = response.user
+        setUser({
+          email: logedUser?.email,
+          name: logedUser?.name,
+          uid: logedUser?.uid
+        })
+      }
       setUser(response.user)
       getUserAdditionalData(user)
       return response.user
