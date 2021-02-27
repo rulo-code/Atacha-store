@@ -1,10 +1,12 @@
 import * as React from "react"
 import { AppProps } from "next/app"
-import { AuthProvider } from "../hooks/useAuth"
+import { ApolloProvider } from "@apollo/client"
+// import { AuthProvider } from "../hooks/useAuth"
 import Page from "../components/Page/Page"
 
 import Router from "next/router"
 import Head from "next/head"
+import withData from "../lib/withData"
 
 import Nprogress from "nprogress"
 import "nprogress/nprogress.css"
@@ -14,7 +16,7 @@ Router.events.on("routeChangeStart", () => Nprogress.start())
 Router.events.on("routeChangeComplete", () => Nprogress.done())
 Router.events.on("routeChangeError", () => Nprogress.done())
 
-export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+function MyApp({ Component, pageProps, apollo }: AppProps | any): JSX.Element {
   return (
     <>
       <Head>
@@ -22,10 +24,23 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <title>Atacha</title>
       </Head>
       <Page>
-        <AuthProvider>
+        <ApolloProvider client={apollo}>
+          {/* <AuthProvider> */}
           <Component {...pageProps} />
-        </AuthProvider>
+          {/* </AuthProvider> */}
+        </ApolloProvider>
       </Page>
     </>
   )
 }
+
+MyApp.getInitialProps = async ({ Component, ctx }: AppProps | any) => {
+  let pageProps = { query: {} }
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx)
+  }
+  pageProps.query = ctx.query
+  return { pageProps }
+}
+
+export default withData(MyApp)

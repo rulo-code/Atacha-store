@@ -1,8 +1,13 @@
+import Products from "../components/Products/Products"
+
 const mercadillo: React.FunctionComponent = () => {
   return (
-    <div className="renderedPage">
-      <p>mercadillo</p>
-    </div>
+    <>
+      <Products />
+      <div className="renderedPage">
+        <p>mercadillo</p>
+      </div>
+    </>
   )
 }
 
