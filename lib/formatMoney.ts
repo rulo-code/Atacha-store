@@ -1,0 +1,9 @@
+const formatter = new Intl.NumberFormat("es-COL", {
+  style: "currency",
+  currency: "COP",
+})
+
+export default function formatMoney(cents: number) {
+  const Pesos = cents / 1000
+  return formatter.format(Pesos)
+}

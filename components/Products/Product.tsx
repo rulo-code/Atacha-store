@@ -1,12 +1,16 @@
-const Product: React.FunctionComponent = ({ product }) => {
-  console.log(product)
+import Link from "next/link"
 
+const Product = ({ product }: any) => {
   return (
     <div>
-      <p>product </p>
-      <p>oh mi good</p>
+      <img src={product?.photo?.image?.publicUrlTransformed} alt={product.name} />
+      <div>
+        <Link href={`/product/${product?.id}`}>{product?.name}</Link>
+      </div>
+      <p>{product?.price}</p>
+      <p>{product?.description}</p>
+      {/* TODO: Add buttons to edit and delte item */}
     </div>
   )
 }
-
 export default Product

@@ -1,8 +1,8 @@
+import { useQuery } from "@apollo/client"
 import gql from "graphql-tag"
 import Product from "./Product"
-import { useQuery } from "@apollo/client"
 
-const ALL_PRODUCTS_QUERY = gql`
+export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY {
     allProducts {
       id
@@ -21,15 +21,15 @@ const ALL_PRODUCTS_QUERY = gql`
 
 const Products: React.FunctionComponent = () => {
   const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY)
-  if (error) {
-    return <p>{error.message}</p>
-  }
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error: {error?.message}</p>
   return (
     <div>
-      {data.allProducts.map((product) => {
-        ;<h2>{product.name}</h2>
-      })}
-      <Product />
+      <div>
+        {data?.allProducts?.map((product: any) => (
+          <Product key={product?.id} product={product} />
+        ))}
+      </div>
     </div>
   )
 }
