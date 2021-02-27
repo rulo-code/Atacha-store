@@ -35,7 +35,6 @@ uid: "",
 
   const getUserAdditionalData = async (user: any) => {
     const userData = await db.collection("users").doc(user.uid).get()
-    console.log(userData.data())
     if (userData) {
       let registeredUser
       registeredUser = userData.data()

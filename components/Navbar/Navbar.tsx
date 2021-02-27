@@ -2,11 +2,17 @@ import { useRouter } from "next/router"
 import Link from "next/link"
 import React from "react"
 import Image from "next/image"
+import { useAuth } from "../../hooks/useAuth"
 
 import styles from "./Navbar.module.scss"
 
 const Navbar: React.FC = () => {
   const router = useRouter()
+  const { user } = useAuth()
+
+  if (router.pathname == "/" && user!) {
+    return null
+  }
   return (
     <div className={styles.navbar}>
       <Link href="/inventario">

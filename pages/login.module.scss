@@ -1,0 +1,33 @@
+.introContainer {
+  display: flex;
+  position: relative;
+  width: 100%;
+  min-height: 20rem;
+}
+.carousel {
+  max-width: 382px;
+  height: 392px;
+  border: yellowgreen solid 1px;
+  overflow: hidden;
+  position: relative;
+}
+.introStep {
+  border: red solid 1px;
+  height: 20rem;
+  background: blue;
+  position: absolute;
+  display: block;
+  top: 0;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: 100%;
+  background-color: #00008b;
+  color: #fff;
+  margin: 0 15px;
+  font-size: 4em;
+}

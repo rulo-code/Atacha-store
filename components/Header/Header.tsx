@@ -1,10 +1,19 @@
 import Link from "next/link"
 import styles from "./Header.module.scss"
+import { useAuth } from "../../hooks/useAuth"
+
 import SearchBar from "../SerachBar/SearchBar"
 import Image from "next/image"
 import React from "react"
+import { useRouter } from "next/router"
 
 const Header: React.FC = () => {
+  const router = useRouter()
+  const { user } = useAuth()
+
+  if (router.pathname == "/" && user!) {
+    return null
+  }
   return (
     <div className={styles.header}>
       <div className={styles.logoContainer}>

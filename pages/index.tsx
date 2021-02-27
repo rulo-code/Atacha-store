@@ -1,5 +1,6 @@
+import Login from "./login"
 const Index: React.FunctionComponent = () => {
-  return <>Atacha</>
+  return <Login />
 }
 
 export default Index

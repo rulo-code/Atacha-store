@@ -1,0 +1,29 @@
+.Dots {
+  padding-top: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  user-select: none;
+  color: var(--grey-color-1);
+  border-radius: 50%;
+  background: var(--grey-color-1);
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.2rem;
+  opacity: 0.5;
+  border: 2px solid var(--main-color-1);
+  transition: 0.3s;
+}
+.dotActive {
+  opacity: 1;
+  background: none;
+
+  color: var(--main-color-1);
+}
