@@ -1,9 +1,9 @@
 .Dots {
-  padding-top: 3rem;
-
+  padding-top: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.5rem;
 }
 
 .dot {
@@ -11,8 +11,8 @@
   color: var(--grey-color-1);
   border-radius: 50%;
   background: var(--grey-color-1);
-  width: 16px;
-  height: 16px;
+  width: 8px;
+  height: 8px;
   display: flex;
   justify-content: center;
   align-items: center;

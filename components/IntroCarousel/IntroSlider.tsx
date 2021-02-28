@@ -2,11 +2,11 @@ import React, { useState } from "react"
 import IntroStep from "../IntroStep/IntroStep"
 import styles from "./IntroSlider.module.scss"
 import Dots from "../Dots/Dots"
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa"
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa"
 const data = [
   {
     content: "Brinda a tu vida la posibilidad de cumplir todo aquello que siempre has deseado",
-    imageUrl: "/images/logo2.png",
+    imageUrl: "/images/logo.svg",
   },
   {
     content: "Llena tu baúl con lo que más aprecias o estás dispuesto a cambiar",
@@ -23,7 +23,30 @@ const data = [
 ]
 
 const IntroSlider: React.FC = () => {
+  let touchStartX = 0
+  let touchStartY = 0
+  let touchEndX = 0
+  let touchEndY = 0
+  function WhatImustDo() {
+    // Put a mensage in the console
+    if (touchEndX < touchStartX) {
+      return "left"
+    }
+    if (touchEndX > touchStartX) {
+      return "right"
+    }
+    if (touchEndY < touchStartY) {
+      return "down"
+    }
+    if (touchEndY > touchStartY) {
+      return "up"
+    }
+    if (touchEndY === touchStartY && touchEndX === touchStartX) {
+      return "tap"
+    }
+  }
   const [current, setCurrent] = useState(0)
+
   console.log(current)
   const length = data.length
   const nextSlide = () => {
@@ -34,9 +57,26 @@ const IntroSlider: React.FC = () => {
   }
   return (
     <>
-      <section className={styles.IntroSlider}>
-        <FaArrowAltCircleRight className={styles.leftArrow} onClick={nextSlide} />
-        <FaArrowAltCircleLeft className={styles.RightArrow} onClick={prevSlide} />
+      <section
+        className={styles.IntroSlider}
+        onTouchStart={(e) => {
+          touchStartX = e.changedTouches[0].screenX
+          touchStartY = e.changedTouches[0].screenY
+        }}
+        onTouchEnd={(e) => {
+          touchEndX = e.changedTouches[0].screenX
+          touchEndY = e.changedTouches[0].screenY
+          const direction = WhatImustDo()
+          if (direction === "left") {
+            nextSlide()
+          }
+          if (direction === "right") {
+            prevSlide()
+          }
+        }}
+      >
+        <FaChevronRight className={styles.leftArrow} onClick={nextSlide} />
+        <FaChevronLeft className={styles.RightArrow} onClick={prevSlide} />
 
         {data.map((step, index) => (
           <IntroStep

@@ -14,7 +14,7 @@ const Dots: React.FC<Iprops> = ({ data, current }: Iprops) => {
             {current === index && (
               <i
                 key={index}
-                className={current === index ? "far fa-dot-circle active" : "far fa-dot-circle"}
+                className={current === index ? "fas fa-dot-circle active" : "fas fa-dot-circle"}
               ></i>
             )}
           </div>
