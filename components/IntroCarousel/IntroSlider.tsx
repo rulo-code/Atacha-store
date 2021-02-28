@@ -94,8 +94,8 @@ const IntroSlider: React.FC = () => {
             data={data}
           />
         ))}
+        <Dots current={current} data={data} />
       </section>
-      <Dots current={current} data={data} />
     </>
   )
 }

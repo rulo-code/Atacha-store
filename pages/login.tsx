@@ -39,6 +39,7 @@ const LoginPage: React.FC = () => {
   return (
     <>
       <IntroSlider />
+      <LoginForm />
     </>
   )
 }

@@ -144,7 +144,6 @@ uid: "",
         .doc(user.uid)
         .onSnapshot((doc) => {
           let newUser
-          console.log(doc.data())
           newUser = doc.data()
           setUser({
             email: newUser?.email,
