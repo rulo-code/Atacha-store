@@ -9,9 +9,13 @@ import { useRouter } from "next/router"
 
 const Header: React.FC = () => {
   const router = useRouter()
-  const { user } = useAuth()
+  const { uid } = useAuth()
 
-  if (router.pathname == "/" && user!) {
+  if (
+    (router.pathname == "/" && uid!) ||
+    router.pathname == "/registro" ||
+    router.pathname == "/login"
+  ) {
     return null
   }
   return (

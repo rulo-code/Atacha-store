@@ -58,13 +58,16 @@ const LoginForm: React.FC = () => {
     <div className={styles.loginForm}>
       {emailLogin ? (
         <form onSubmit={handleSubmit(onSubmit)}>
+          <h2 className={styles.formTitle}>Ingresa</h2>
           <div>
-            <label htmlFor="email">Email</label>
-            <div>
+            <div className={styles.Input}>
+              <p>@</p>
+
               <input
                 id="email"
                 type="email"
                 name="email"
+                placeholder="Email ..."
                 ref={register({
                   required: "Por favor ingresa tu email",
                   pattern: {
@@ -77,10 +80,11 @@ const LoginForm: React.FC = () => {
             </div>
           </div>
           <div className="mt-6">
-            <label htmlFor="password">Contraseña</label>
-            <div>
+            <div className={styles.Input}>
+              <i className="fas fa-lock"></i>
               <input
                 id="password"
+                placeholder="Contaseña ..."
                 type="password"
                 name="password"
                 ref={register({
@@ -93,22 +97,39 @@ const LoginForm: React.FC = () => {
               />
               {errors.password && <div>{errors.password.message}</div>}
             </div>
-          </div>
-          <div className="mt-6">
-            <span>
-              <button type="submit">Ingresar</button>
-            </span>
+            {error?.message && (
+              <div>
+                <span>{error.message}</span>
+              </div>
+            )}
           </div>
           <div>
-            <Link href="/resetPassword">
-              <a href="#">¿Olvidaste tu contraseña?</a>
-            </Link>
+            <button className={styles.submitButtom} type="submit">
+              Ingresar
+            </button>
           </div>
-          {error?.message && (
-            <div>
-              <span>{error.message}</span>
+          <div className={styles.loginOptions}>
+            <p>o inicia sesión con ...</p>
+            <div className={styles.optionsContainer}>
+              <button
+                onClick={loginGoogle}
+                className={`${styles.loginOption} ${styles.loginOptionSmall}`}
+              >
+                <div className={styles.imageContainer}>
+                  <Image src="/images/google.svg" alt="logo" width={31} height={31} />
+                </div>
+              </button>
+
+              <button
+                onClick={loginFB}
+                className={`${styles.loginOption} ${styles.loginOptionSmall} ${styles.facebookLogin}`}
+              >
+                <div className={styles.imageContainer}>
+                  <Image src="/images/fb.svg" alt="logo" width={31} height={31} />
+                </div>
+              </button>
             </div>
-          )}
+          </div>
         </form>
       ) : (
         <>

@@ -1,18 +1,13 @@
 import Link from "next/link"
 import SingUpForm from "../components/Forms/singUpForm"
+import IntroSlider from "../components/IntroCarousel/IntroSlider"
 
 const SignUpPage: React.FC = () => {
   return (
-    <div>
-      <h2>Registro</h2>
-      <p>
-        ¿Ya tiene una cuenta?{" "}
-        <Link href="/login">
-          <a href="#">¡Ingresa!</a>
-        </Link>
-      </p>
+    <>
+      <IntroSlider />
       <SingUpForm />
-    </div>
+    </>
   )
 }
 export default SignUpPage

@@ -1,5 +1,7 @@
 import * as React from "react"
 import { AppProps } from "next/app"
+import { useRouter } from "next/router"
+
 import { AuthProvider } from "../hooks/useAuth"
 import Page from "../components/Page/Page"
 import { useAuth } from "../hooks/useAuth"
@@ -16,7 +18,14 @@ Router.events.on("routeChangeComplete", () => Nprogress.done())
 Router.events.on("routeChangeError", () => Nprogress.done())
 
 export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
-  const { user } = useAuth()
+  const user = useAuth()
+  const router = useRouter()
+
+  React.useEffect(() => {
+    if (router.pathname == "/" && user!) {
+      router.push("/login")
+    }
+  }, [user])
   return (
     <>
       <Head>

@@ -8,9 +8,13 @@ import styles from "./Navbar.module.scss"
 
 const Navbar: React.FC = () => {
   const router = useRouter()
-  const { user } = useAuth()
+  const { uid } = useAuth()
 
-  if (router.pathname == "/" && user!) {
+  if (
+    (router.pathname == "/" && uid!) ||
+    router.pathname == "/registro" ||
+    router.pathname == "/login"
+  ) {
     return null
   }
   return (
