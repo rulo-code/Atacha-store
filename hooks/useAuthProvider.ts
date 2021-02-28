@@ -35,7 +35,6 @@ uid: "",
 
   const getUserAdditionalData = async (user: any) => {
     const userData = await db.collection("users").doc(user.uid).get()
-    console.log(userData.data())
     if (userData) {
       let registeredUser
       registeredUser = userData.data()
@@ -145,7 +144,6 @@ uid: "",
         .doc(user.uid)
         .onSnapshot((doc) => {
           let newUser
-          console.log(doc.data())
           newUser = doc.data()
           setUser({
             email: newUser?.email,
