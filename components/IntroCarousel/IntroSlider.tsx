@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import IntroStep from "../IntroStep/IntroStep"
 import styles from "./IntroSlider.module.scss"
 import Dots from "../Dots/Dots"
@@ -46,15 +46,21 @@ const IntroSlider: React.FC = () => {
     }
   }
   const [current, setCurrent] = useState(0)
-
-  console.log(current)
+  let myTimeout: any
   const length = data.length
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1)
+    clearTimeout(myTimeout)
   }
   const prevSlide = () => {
     setCurrent(current === 0 ? length - 1 : current - 1)
+    clearTimeout(myTimeout)
   }
+  useEffect(() => {
+    myTimeout = setTimeout(() => {
+      nextSlide()
+    }, 10000)
+  }, [nextSlide, prevSlide])
   return (
     <>
       <section

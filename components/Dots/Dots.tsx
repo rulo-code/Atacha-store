@@ -10,10 +10,12 @@ const Dots: React.FC<Iprops> = ({ data, current }: Iprops) => {
     <div className={styles.Dots}>
       {data.map((_, index) => {
         return (
-          <div className={current === index ? `${styles.dotActive} ${styles.dot}` : styles.dot}>
+          <div
+            key={index}
+            className={current === index ? `${styles.dotActive} ${styles.dot}` : styles.dot}
+          >
             {current === index && (
               <i
-                key={index}
                 className={current === index ? "fas fa-dot-circle active" : "fas fa-dot-circle"}
               ></i>
             )}
