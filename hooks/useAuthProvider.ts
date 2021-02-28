@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { auth, db, fbAuth, googleAuth } from "../config/firebase"
+import { auth, db, fbAuth, googleAuth } from "../config/Firebase"
 interface UserData {
   name: string | any
   email: string | any
@@ -9,8 +9,8 @@ interface UserData {
 const useAuthProvider = () => {
   const [user, setUser] = useState<UserData>({
     email: "",
-name: "",
-uid: "",
+    name: "",
+    uid: "",
   })
 
   const createUser = async (user: any) => {
@@ -42,7 +42,7 @@ uid: "",
       setUser({
         email: registeredUser?.email,
         name: registeredUser?.name,
-        uid: registeredUser?.uid
+        uid: registeredUser?.uid,
       })
     }
   }
@@ -56,7 +56,7 @@ uid: "",
         setUser({
           email: logedUser?.email,
           name: logedUser?.name,
-          uid: logedUser?.uid
+          uid: logedUser?.uid,
         })
       }
       setUser(response.user)
@@ -83,8 +83,8 @@ uid: "",
     await auth.signOut()
     return setUser({
       email: "",
-  name: "",
-  uid: "",
+      name: "",
+      uid: "",
     })
   }
 
@@ -145,12 +145,11 @@ uid: "",
         .doc(user.uid)
         .onSnapshot((doc) => {
           let newUser
-          console.log(doc.data())
           newUser = doc.data()
           setUser({
             email: newUser?.email,
             name: newUser?.name,
-            uid: newUser?.uid
+            uid: newUser?.uid,
           })
         })
       return () => unsubscribe()

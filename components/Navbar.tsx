@@ -3,25 +3,25 @@ import Link from "next/link"
 import React from "react"
 import Image from "next/image"
 
-import styles from "./Navbar.module.scss"
+import styles from "../assets/styles/components/Navbar.module.scss"
 
 const Navbar: React.FC = () => {
   const router = useRouter()
   return (
     <div className={styles.navbar}>
-      <Link href="/inventario">
+      <Link href="/inventory">
         <div
-          className={router.pathname == "/inventario" ? styles.navbarItemActive : styles.navbarItem}
+          className={router.pathname == "/inventory" ? styles.navbarItemActive : styles.navbarItem}
         >
           <div className={styles.image}>
             <Image src="/images/mochila.png" alt="logo" layout="responsive" width={0} height={0} />
           </div>
         </div>
       </Link>
-      <Link href="/mercadillo">
+      <Link href="/marketPlace">
         <div
           className={
-            router.pathname == "/mercadillo" || router.pathname == "/"
+            router.pathname == "/marketPlace" || router.pathname == "/"
               ? styles.navbarItemActive
               : styles.navbarItem
           }
@@ -37,8 +37,8 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </Link>
-      <Link href="/deseos">
-        <div className={router.pathname == "/deseos" ? styles.navbarItemActive : styles.navbarItem}>
+      <Link href="/wishes">
+        <div className={router.pathname == "/wishes" ? styles.navbarItemActive : styles.navbarItem}>
           <div className={styles.image}>
             <Image src="/images/dreams.png" alt="logo" layout="responsive" width={0} height={0} />
           </div>

@@ -1,13 +1,13 @@
 import Link from "next/link"
-import LoginForm from "../components/Forms/loginForm"
+import LoginForm from "../components/LoginForm"
 
-const LoginPage: React.FC = () => {
+const Login: React.FC = () => {
   return (
     <div>
       <h2>Ingresar</h2>
       <p>
         {"¿No tienes cuenta?"}
-        <Link href="/registro">
+        <Link href="/register">
           <a href="#">¡Registrate!</a>
         </Link>
       </p>
@@ -17,4 +17,4 @@ const LoginPage: React.FC = () => {
     </div>
   )
 }
-export default LoginPage
+export default Login

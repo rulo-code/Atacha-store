@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client"
 import gql from "graphql-tag"
+import DisplayError from "./ErrorMessage"
 import Product from "./Product"
 
 export const ALL_PRODUCTS_QUERY = gql`
@@ -22,9 +23,9 @@ export const ALL_PRODUCTS_QUERY = gql`
 const Products: React.FunctionComponent = () => {
   const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY)
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error?.message}</p>
   return (
     <div>
+      <DisplayError error={error?.message} />
       <div>
         {data?.allProducts?.map((product: any) => (
           <Product key={product?.id} product={product} />

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "next build",
     "start": "next start",
-    "dev": "next -p 3001"
+    "dev": "next -p 7777"
   },
   "keywords": [],
   "author": "Andres Santana, Cesar Ortiz",

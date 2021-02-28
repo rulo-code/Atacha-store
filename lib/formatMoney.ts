@@ -1,4 +1,4 @@
-const formatter = new Intl.NumberFormat("es-COL", {
+const formatter = new Intl.NumberFormat("es-Co", {
   style: "currency",
   currency: "COP",
 })

@@ -1,4 +1,4 @@
-import CreateProducts from "../components/Products/CreateProducts"
+import CreateProducts from "../components/CreateProtducts"
 
 const Sell: React.FunctionComponent = () => {
   return (

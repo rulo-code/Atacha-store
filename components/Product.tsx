@@ -9,7 +9,18 @@ const Product = ({ product }: any) => {
       </div>
       <p>{product?.price}</p>
       <p>{product?.description}</p>
-      {/* TODO: Add buttons to edit and delte item */}
+      <div>
+        <Link
+          href={{
+            pathname: "update",
+            query: {
+              id: product?.id,
+            },
+          }}
+        >
+          Edit
+        </Link>
+      </div>
     </div>
   )
 }

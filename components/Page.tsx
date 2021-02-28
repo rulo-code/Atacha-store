@@ -1,7 +1,7 @@
 import React from "react"
-import Header from "../Header/Header"
-import Navbar from "../Navbar/Navbar"
-import styles from "./Page.module.scss"
+import Header from "./Header"
+import Navbar from "./Navbar"
+import styles from "../assets/styles/components/Page.module.scss"
 
 interface IProps {
   children: React.ReactNode

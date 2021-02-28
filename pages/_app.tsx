@@ -1,16 +1,16 @@
 import * as React from "react"
 import { AppProps } from "next/app"
 import { ApolloProvider } from "@apollo/client"
-// import { AuthProvider } from "../hooks/useAuth"
-import Page from "../components/Page/Page"
+import { AuthProvider } from "../hooks/useAuth"
+import Page from "../components/Page"
 
 import Router from "next/router"
 import Head from "next/head"
-import withData from "../lib/withData"
+import WithData from "../lib/WithData"
 
 import Nprogress from "nprogress"
 import "nprogress/nprogress.css"
-import "../assets/styles/global.scss"
+import "../assets/styles/Global.scss"
 
 Router.events.on("routeChangeStart", () => Nprogress.start())
 Router.events.on("routeChangeComplete", () => Nprogress.done())
@@ -25,9 +25,9 @@ function MyApp({ Component, pageProps, apollo }: AppProps | any): JSX.Element {
       </Head>
       <Page>
         <ApolloProvider client={apollo}>
-          {/* <AuthProvider> */}
-          <Component {...pageProps} />
-          {/* </AuthProvider> */}
+          <AuthProvider>
+            <Component {...pageProps} />
+          </AuthProvider>
         </ApolloProvider>
       </Page>
     </>
@@ -43,4 +43,4 @@ MyApp.getInitialProps = async ({ Component, ctx }: AppProps | any) => {
   return { pageProps }
 }
 
-export default withData(MyApp)
+export default WithData(MyApp)

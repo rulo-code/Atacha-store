@@ -1,8 +1,8 @@
 import Link from "next/link"
 
-import ResetPasswordForm from "../components/Forms/resetPaswrodForm"
+import ResetPasswordForm from "../components/ReserPaswordForm"
 
-const resetPassword: React.FC = () => {
+const ResetPassword: React.FC = () => {
   return (
     <div>
       <div>
@@ -22,4 +22,4 @@ const resetPassword: React.FC = () => {
     </div>
   )
 }
-export default resetPassword
+export default ResetPassword

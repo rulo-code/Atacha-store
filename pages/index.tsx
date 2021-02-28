@@ -1,4 +1,4 @@
-const Index: React.FunctionComponent = () => {
+const Index: React.FC = () => {
   return <>Atacha</>
 }
 

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const useForm = (initial = {}) => {
+const UseForm = (initial = {}) => {
   // create a state object for our inputs
   const [inputs, setInputs] = useState(initial)
 
@@ -36,4 +36,4 @@ const useForm = (initial = {}) => {
     clearForm,
   }
 }
-export default useForm
+export default UseForm

@@ -1,6 +1,6 @@
 import Link from "next/link"
-import styles from "./Header.module.scss"
-import SearchBar from "../SerachBar/SearchBar"
+import styles from "../assets/styles/components/Header.module.scss"
+import SearchBar from "./SearchBar"
 import Image from "next/image"
 import React from "react"
 
