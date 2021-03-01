@@ -6,7 +6,7 @@ import { useRouter } from "next/router"
 import Image from "next/image"
 import Link from "next/link"
 
-import styles from "../assets/styles/components/loginForm.module.scss"
+import styles from "../assets/styles/components/LoginForm.module.scss"
 
 interface LoginData {
   email: string

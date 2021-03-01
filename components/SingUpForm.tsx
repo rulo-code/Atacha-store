@@ -3,7 +3,7 @@ import { useAuth } from "../hooks/useAuth"
 import { useRouter } from "next/router"
 import Link from "next/link"
 
-import styles from "../assets/styles/components/loginForm.module.scss"
+import styles from "../assets/styles/components/LoginForm.module.scss"
 
 interface SingUpData {
   name: string
