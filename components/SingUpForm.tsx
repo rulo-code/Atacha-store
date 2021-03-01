@@ -1,6 +1,10 @@
 import { useForm } from "react-hook-form"
 import { useAuth } from "../hooks/useAuth"
 import { useRouter } from "next/router"
+import Link from "next/link"
+
+import styles from "../assets/styles/components/loginForm.module.scss"
+
 interface SingUpData {
   name: string
   email: string
@@ -26,61 +30,82 @@ const SignUpForm: React.FC = () => {
   const reCorto: RegExp = /\S+@\S+\.\S+/
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label htmlFor="name">Nombre</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          ref={register({
-            required: "Por favor ingresa tu nombre",
-          })}
-        />
-        {errors.name && <div>{errors.name.message}</div>}
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
+    <div className={styles.singUpForm}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h2 className={styles.formTitle}>Registrate</h2>
         <div>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            ref={register({
-              required: "Por favor ingresa tu email",
-              pattern: {
-                value: reCorto,
-                message: "Email no valido",
-              },
-            })}
-          />
-          {errors.email && <div>{errors.email.message}</div>}
+          <div className={styles.Input}>
+            <p>@</p>
+
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Email ..."
+              ref={register({
+                required: "Por favor ingresa tu email",
+                pattern: {
+                  value: reCorto,
+                  message: "Email no valido",
+                },
+              })}
+            />
+            {errors.email && <div>{errors.email.message}</div>}
+          </div>
         </div>
-      </div>
-      <div className="mt-6">
-        <label htmlFor="password">Constraseña</label>
+        <div className="mt-6">
+          <div className={styles.Input}>
+            <i className="fas fa-lock"></i>
+            <input
+              id="password"
+              placeholder="Contaseña ..."
+              type="password"
+              name="password"
+              ref={register({
+                required: "Por favor ingresa una contraseña",
+                minLength: {
+                  value: 6,
+                  message: "Debe tener al menos 6 caracteres",
+                },
+              })}
+            />
+            {errors.password && <div>{errors.password.message}</div>}
+          </div>
+        </div>
+        <div className="mt-6">
+          <div className={styles.Input}>
+            <i className="fas fa-user"></i>
+            <input
+              id="name"
+              placeholder="Nombre ..."
+              type="text"
+              name="password"
+              ref={register({
+                required: "Por favor ingresa tu nombre",
+                minLength: {
+                  value: 6,
+                  message: "Debe tener al menos 6 caracteres",
+                },
+              })}
+            />
+            {errors.password && <div>{errors.password.message}</div>}
+          </div>
+        </div>
         <div>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            ref={register({
-              required: "Por favor ingresa una contraseña",
-              minLength: {
-                value: 6,
-                message: "Debe tener al menos 6 caracteres",
-              },
-            })}
-          />
-          {errors.password && <div>{errors.password.message}</div>}
+          <button className={styles.submitButtom} type="submit">
+            Registro
+          </button>
         </div>
-      </div>
-      <div className="mt-6">
-        <span>
-          <button type="submit">Resgistrame</button>
-        </span>
-      </div>
-    </form>
+        <div className={styles.RegisterOption}>
+          <p>¿Ya tienes cuenta?</p>
+          <div className={styles.resgisterLink}>
+            <Link href="/login">
+              <a href="#">Ingresa</a>
+            </Link>
+          </div>
+        </div>
+      </form>
+    </div>
   )
 }
 export default SignUpForm
