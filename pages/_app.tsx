@@ -1,12 +1,15 @@
 import * as React from "react"
 import { AppProps } from "next/app"
 import { ApolloProvider } from "@apollo/client"
-import { AuthProvider } from "../hooks/useAuth"
+import { AuthProvider, useAuth } from "../hooks/useAuth"
+import { useRouter } from "next/router"
+
 import Page from "../components/Page"
+import LoginPage from "./login"
 
 import Router from "next/router"
 import Head from "next/head"
-import WithData from "../lib/WithData"
+import WithData from "../lib/withData"
 
 import Nprogress from "nprogress"
 import "nprogress/nprogress.css"
@@ -17,6 +20,14 @@ Router.events.on("routeChangeComplete", () => Nprogress.done())
 Router.events.on("routeChangeError", () => Nprogress.done())
 
 function MyApp({ Component, pageProps, apollo }: AppProps | any): JSX.Element {
+  const user = useAuth()
+  const router = useRouter()
+
+  React.useEffect(() => {
+    if (router.pathname == "/" && user!) {
+      router.push("/login")
+    }
+  }, [user])
   return (
     <>
       <Head>
@@ -25,9 +36,7 @@ function MyApp({ Component, pageProps, apollo }: AppProps | any): JSX.Element {
       </Head>
       <Page>
         <ApolloProvider client={apollo}>
-          <AuthProvider>
-            <Component {...pageProps} />
-          </AuthProvider>
+          <AuthProvider>{user ? <Component {...pageProps} /> : <LoginPage />}</AuthProvider>
         </ApolloProvider>
       </Page>
     </>

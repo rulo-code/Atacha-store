@@ -6,7 +6,7 @@
   "scripts": {
     "build": "next build",
     "start": "next start",
-    "dev": "next -p 7777"
+    "dev": "next -p 4000"
   },
   "keywords": [],
   "author": "Andres Santana, Cesar Ortiz",
@@ -29,8 +29,12 @@
     "nprogress": "^0.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-elastic-carousel": "^0.11.1",
     "react-hook-form": "^6.15.4",
-    "sass": "^1.32.8"
+    "react-icons": "^4.2.0",
+    "react-slick": "^0.28.0",
+    "sass": "^1.32.8",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/apollo-upload-client": "^14.1.0",
