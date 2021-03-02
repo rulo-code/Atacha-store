@@ -1,4 +1,5 @@
 import Link from "next/link"
+import DeleteProduct from "./DeleteProduct"
 
 const Product = ({ product }: any) => {
   return (
@@ -18,8 +19,9 @@ const Product = ({ product }: any) => {
             },
           }}
         >
-          Edit
+          Editar
         </Link>
+        <DeleteProduct id={product?.id}>Eliminar</DeleteProduct>
       </div>
     </div>
   )
