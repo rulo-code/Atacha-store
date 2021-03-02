@@ -4,13 +4,14 @@ import { getDataFromTree } from "@apollo/client/react/ssr"
 import { createUploadLink } from "apollo-upload-client"
 import withApollo from "next-with-apollo"
 import { endpoint, prodEndpoint } from "../config"
+import paginationField from "./paginationField"
 
 function createClient({ headers, initialState }: any) {
   return new ApolloClient({
     link: ApolloLink.from([
-      onError(({ graphQLErrors, networkError }: any) => {
+      onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors)
-          graphQLErrors.forEach(({ message, locations, path }: any) =>
+          graphQLErrors.forEach(({ message, locations, path }) =>
             console.log(
               `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
             ),
@@ -33,7 +34,8 @@ function createClient({ headers, initialState }: any) {
         Query: {
           fields: {
             // TODO: We will add this together!
-            // allProducts: paginationField(),
+            //@ts-ignore
+            allProducts: paginationField(),
           },
         },
       },
