@@ -28,10 +28,10 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </Link>
-      <Link href="/marketPlace">
+      <Link href="/products">
         <div
           className={
-            router.pathname == "/marketPlace" || router.pathname == "/"
+            router.pathname == "/products" || router.pathname == "/"
               ? styles.navbarItemActive
               : styles.navbarItem
           }

@@ -3,6 +3,7 @@ import { ALL_PRODUCTS_QUERY } from "./Products"
 import gql from "graphql-tag"
 import useForm from "../hooks/useForm"
 import Router from "next/router"
+import DisplayError from "./ErrorMessage"
 
 const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
@@ -52,7 +53,7 @@ const CreateProduct = () => {
         })
       }}
     >
-      {error ? <p>{error?.message}</p> : null}
+      {error ? <DisplayError error={error} /> : null}
       {data ? <p>Articulo Creado</p> : null}
       <fieldset disabled={loading}>
         <label htmlFor="image">

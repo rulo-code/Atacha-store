@@ -6,13 +6,19 @@ const DELETE_PRODUCT_MUTATION = gql`
   mutation DELETE_PRODUCT_MUTATION($id: ID!) {
     deleteProduct(id: $id) {
       id
+      name
     }
   }
 `
 
 const DeleteProduct: React.FC = ({ id, children }) => {
+  const update = (cache: any, payload: any): void => {
+    cache.evict(cache.identify(payload.data.deleteProduct))
+  }
+
   const [deleteProduct, { loading, error }] = useMutation(DELETE_PRODUCT_MUTATION, {
     variables: { id },
+    update,
   })
 
   const handleClick = () => {
@@ -22,7 +28,7 @@ const DeleteProduct: React.FC = ({ id, children }) => {
   }
   return (
     <>
-      <DisplayError error={error} />
+      <DisplayError error={error?.message} />
       <button type="button" onClick={handleClick} disabled={loading}>
         {children}
       </button>

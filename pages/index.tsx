@@ -1,5 +1,1 @@
-const Index: React.FC = () => {
-  return <>Atacha</>
-}
-
-export default Index
+export { default } from "./products"
